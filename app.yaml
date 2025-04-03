@@ -1,0 +1,11 @@
+# app.yaml
+server:
+  http:
+    port: "8080"
+  grpc:
+    port: "9090"
+log:
+  level: "info"
+database:
+  connection_string: "postgres://user:password@host:port/database"
+some_value: "example value"

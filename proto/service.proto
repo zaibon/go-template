@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package service;
+
+option go_package = "my-go-microservice/proto";
+
+service MyService {
+  rpc SomeGRPCMethod (YourRequest) returns (YourResponse) {}
+}
+
+message YourRequest {
+  string message = 1;
+}
+
+message YourResponse {
+  string result = 1;
+}
