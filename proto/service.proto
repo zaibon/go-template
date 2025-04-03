@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package service;
 
-option go_package = "my-go-microservice/proto";
+option go_package = "github.com/zaibon/go-template/proto";
 
 service MyService {
   rpc SomeGRPCMethod (YourRequest) returns (YourResponse) {}

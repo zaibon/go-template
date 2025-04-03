@@ -1,4 +1,3 @@
-// cmd/service/main.go
 package main
 
 import (
@@ -7,6 +6,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"database/sql"
 
@@ -24,7 +24,9 @@ func main() {
 	var rootCmd = &cobra.Command{
 		Use:   "my-go-service",
 		Short: "My Go Microservice",
-		Run:   runService,
+		Long: `This service provides a basic microservice setup with
+configuration, logging, health checks, and HTTP/gRPC server capabilities.`,
+		Run: runService,
 	}
 
 	if err := rootCmd.Execute(); err != nil {
@@ -40,7 +42,11 @@ func runService(cmd *cobra.Command, args []string) {
 		os.Exit(1)
 	}
 
-	logger := log.NewLogger(cfg.Log.Level)
+	logger := log.NewLogger(
+		log.WithLevel(cfg.Log.Level),
+		log.WithFormat(cfg.Log.Format),
+		log.WithOutput(cfg.Log.Output),
+	)
 
 	svc := service.NewService(logger)
 
@@ -81,15 +87,19 @@ func runService(cmd *cobra.Command, args []string) {
 
 	logger.Info("Shutting down servers...")
 
-	if err := httpServer.Stop(context.Background()); err != nil {
+	// Create a shutdown context with a timeout.
+	shutdownCtx, shutdownCancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer shutdownCancel()
+
+	if err := httpServer.Stop(shutdownCtx); err != nil {
 		logger.Error("HTTP server shutdown failed", "error", err)
 	}
 
-	if err := grpcServer.Stop(context.Background()); err != nil {
+	if err := grpcServer.Stop(shutdownCtx); err != nil {
 		logger.Error("gRPC server shutdown failed", "error", err)
 	}
 
-	if err := svc.Stop(context.Background()); err != nil {
+	if err := svc.Stop(shutdownCtx); err != nil {
 		logger.Error("Service shutdown failed", "error", err)
 	}
 }

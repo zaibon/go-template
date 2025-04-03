@@ -3,15 +3,18 @@ module github.com/zaibon/go-template
 go 1.24.1
 
 require (
+	github.com/google/uuid v1.6.0
+	github.com/gorilla/mux v1.8.1
+	github.com/rs/cors v1.11.1
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/viper v1.20.1
+	google.golang.org/protobuf v1.36.4
 )
 
 require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	golang.org/x/net v0.34.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250115164207-1a7da9e5054f // indirect
-	google.golang.org/protobuf v1.36.4 // indirect
 )
 
 require (

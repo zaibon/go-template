@@ -17,7 +17,9 @@ type Config struct {
 		} `mapstructure:"GRPC"`
 	} `mapstructure:"SERVER"`
 	Log struct {
-		Level string `mapstructure:"LEVEL"`
+		Level  string `mapstructure:"LEVEL"`
+		Format string `mapstructure:"FORMAT"`
+		Output string `mapstructure:"OUTPUT"`
 	} `mapstructure:"LOG"`
 	Database struct {
 		ConnectionString string `mapstructure:"CONNECTION_STRING"`
