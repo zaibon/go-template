@@ -1,0 +1,8 @@
+# See the dedicated "version" documentation section.
+version: "2"
+
+linters:
+  settings:
+    errcheck:
+      exclude-functions:
+        - (net/http.ResponseWriter).Write
