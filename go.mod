@@ -1,6 +1,7 @@
 module github.com/zaibon/go-template
 
 go 1.24.1
+
 require (
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/mux v1.8.1
@@ -203,7 +204,7 @@ require (
 	go.uber.org/multierr v1.9.0 // indirect
 	golang.org/x/sys v0.31.0 // indirect
 	golang.org/x/text v0.23.0 // indirect
-	google.golang.org/grpc v1.71.1
+	google.golang.org/grpc v1.72.0
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
